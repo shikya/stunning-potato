@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "bookish-pancake": {
+      "hosting": {
+        "stunning-potato": [
+          "bookish-pancake"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "bookish-pancake"
+  }
+}

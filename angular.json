@@ -118,8 +118,13 @@
               "devServerTarget": "stunning-potato:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "stunning-potato"
 }
