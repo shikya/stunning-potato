@@ -1,5 +1,3 @@
 steps:
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['install', '-g', '@angular/cli']
-  - name: 'gcr.io/cloud-builders/npm'
+  - name: 'gcr.io/cloud-builders/npm:current'
     args: ['run', 'relase']
