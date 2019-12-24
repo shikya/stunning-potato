@@ -4,15 +4,26 @@
 
 <div class="main-body">
     <div *ngIf="afAuth.user | async as user; else showLogin">
-        <h1>Hello {{ user.displayName }}!</h1>
-        <button (click)="logout()">Logout</button>
-        <div>
-            <input type="file" accept="image/*;capture=camera" capture="environment">
-            <button (click)="uploadImage()">Upload</button>
-        </div>
-      </div>
+        <button mat-button (click)="logout()">Logout</button>
+        <mat-card>
+            <div>Hello {{ user.displayName }}!</div>
+            <div class="float-button-container">
+                <button mat-fab color="primary">
+                    <mat-icon aria-hidden="false" aria-label="Add New Entry">add</mat-icon>
+                </button>
+            </div>        
+        </mat-card>
+        <app-entry-card></app-entry-card>
+        <!--
+            <div>
+                <input type="file" accept="image/*;capture=camera" capture="environment">
+                <button (click)="uploadImage()">Upload</button>
+            </div>
+        -->
+    </div>
+
       <ng-template #showLogin>
-          <p>Please login.</p>
-          <button (click)="login()">Login with Google</button>
-      </ng-template>
+        <p>Please login.</p>
+        <button mat-raised-button color="primary" (click)="login()">Login with Google</button>
+    </ng-template>
 </div>
