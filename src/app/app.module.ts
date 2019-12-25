@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Materials
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,6 +13,10 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // Custom
 import { AuthService } from './core/auth.service';
@@ -36,7 +42,13 @@ import { EntryCardComponent } from './entry-card/entry-card.component';
     AngularFireAuthModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    FlexLayoutModule
   ],
   providers: [
     AuthService

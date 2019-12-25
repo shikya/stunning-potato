@@ -12,3 +12,19 @@
 .main-body {
     margin: 5px;
 }
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-accordion {
+    margin-top: 10px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-card {
+    margin: 10px 5px 5px 5px;
+}
