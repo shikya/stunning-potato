@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,13 +29,23 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { EntryCardComponent } from './entry-card/entry-card.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+
+const appRoutes = [
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard]  },
+  { path: 'login', component: LoginComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserLoginComponent,
     UserProfileComponent,
-    EntryCardComponent
+    EntryCardComponent,
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +63,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     MatAutocompleteModule,
     FlexLayoutModule,
     AngularFirestoreModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [
     AuthService

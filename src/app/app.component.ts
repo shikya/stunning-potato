@@ -25,8 +25,8 @@ export class AppComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, fb: FormBuilder, private afs: AngularFirestore) {
 
     afAuth.user.subscribe((user: User) => {
-      console.log(user.uid);
       if (user) {
+        console.log(user);
         this.isLoggedIn = true;
         // afs.doc<Preference>(`users/${user.uid}`).valueChanges().subscribe(data => console.log('123', data));
         afs.doc<Preference>(`users/${user.uid}`).ref.get().then(doc => console.log(doc.data()));

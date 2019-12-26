@@ -1,72 +1,13 @@
 <mat-toolbar color="primary">
-    <span>Park Book</span>
-    <span class="spacer"></span>
-    <div *ngIf="!isLoggedIn">
-        <button (click)="login()" mat-icon-button aria-label="log off">
-            <mat-icon>link</mat-icon>
-        </button>
-    </div>
-    <div *ngIf="isLoggedIn">
-        <button (click)="logout()" mat-icon-button aria-label="log in">
-            <mat-icon>link_off</mat-icon>
-        </button>
-    </div>    
+  <span>Park Book</span>
+  <span class="spacer"></span>
+  <div *ngIf="isLoggedIn">
+    <button (click)="logout()" mat-icon-button aria-label="log in">
+      <mat-icon>link_off</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 
 <div class="main-body">
-    <div *ngIf="afAuth.user | async as user">
-        <mat-card>
-            <div>Hello {{ user.displayName }}!</div>
-            <div class="float-button-container">
-                <button mat-fab color="primary">
-                    <mat-icon aria-hidden="false" aria-label="Add New Entry">add</mat-icon>
-                </button>
-            </div>        
-        </mat-card>
-        <mat-card>
-            <mat-card-content>
-                    <p>Add Entry: </p>
-                    <form [formGroup]="newEntryFormControl" class="entry-form" (ngSubmit)="onSubmitNewEntryFormControl()">
-                            <!-- 7117 -->
-                            <mat-form-field class="full-width">
-                                <input formControlName="num" matInput type="number" placeholder="Last 4 digits">
-                            </mat-form-field>
-                
-                            <!-- X -->
-                            <mat-form-field>
-                                    <input formControlName="prefix" matInput type="text" placeholder="Prefix">
-                            </mat-form-field>
-
-                            <!-- 30 -->
-                            <mat-form-field>
-                                    <input matInput formControlName="rtoCode" type="number" placeholder="RTO code">
-                            </mat-form-field>
-
-                            <!-- MH -->
-                            <mat-form-field>
-                                <input type="text" formControlName="stateCode" placeholder="State" aria-label="State" matInput [matAutocomplete]="auto">
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let option of filteredStates | async" [value]="option">
-                                        {{option.name}}
-                                    </mat-option>
-                                </mat-autocomplete>                
-                            </mat-form-field>
-                        </form>
-            </mat-card-content>
-            <mat-card-actions>
-                <button (click)="onSubmitNewEntryFormControl()" type="submit" mat-button color="primary" [disabled]="!newEntryFormControl.valid">Add</button>
-                <button type="reset" mat-button>Cancel</button>
-            </mat-card-actions>
-        </mat-card>
-        <mat-accordion>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>MH30-X-7117</mat-panel-title>
-                    <mat-panel-description>Today 1hr ago</mat-panel-description>
-                </mat-expansion-panel-header>
-                This is remaning content
-            </mat-expansion-panel>
-        </mat-accordion>
-        
-    </div>
+  <router-outlet></router-outlet>
 </div>
