@@ -14,7 +14,7 @@
 </mat-toolbar>
 
 <div class="main-body">
-    <div *ngIf="afAuth.user | async as user; else showLogin">
+    <div *ngIf="afAuth.user | async as user">
         <mat-card>
             <div>Hello {{ user.displayName }}!</div>
             <div class="float-button-container">
@@ -45,8 +45,8 @@
                             <!-- MH -->
                             <mat-form-field>
                                 <input type="text" formControlName="stateCode" placeholder="State" aria-label="State" matInput [matAutocomplete]="auto">
-                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let option of filteredStates | async" [value]="option">
                                         {{option.name}}
                                     </mat-option>
                                 </mat-autocomplete>                
