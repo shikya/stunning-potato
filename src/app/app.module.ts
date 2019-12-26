@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 // Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { EntryCardComponent } from './entry-card/entry-card.component';
 
 @NgModule({
@@ -48,7 +49,8 @@ import { EntryCardComponent } from './entry-card/entry-card.component';
     MatInputModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AngularFirestoreModule
   ],
   providers: [
     AuthService
