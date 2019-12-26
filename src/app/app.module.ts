@@ -32,6 +32,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { CreateEntryComponent } from './create-entry/create-entry.component';
 
 const appRoutes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard]  },
@@ -45,7 +46,8 @@ const appRoutes = [
     UserProfileComponent,
     EntryCardComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    CreateEntryComponent
   ],
   imports: [
     BrowserModule,

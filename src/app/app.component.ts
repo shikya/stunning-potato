@@ -17,53 +17,13 @@ export interface Preference { classAuthorized: string; }
 export class AppComponent implements OnInit {
   title = 'stunning-potato';
   isLoggedIn = false;
-  newEntryFormControl: FormGroup;
+
   classNameAuthorized: string;
 
   filteredStates: Observable<string[]>;
 
-  constructor(public afAuth: AngularFireAuth, fb: FormBuilder, private afs: AngularFirestore) {
-
-    afAuth.user.subscribe((user: User) => {
-      if (user) {
-        console.log(user);
-        this.isLoggedIn = true;
-        // afs.doc<Preference>(`users/${user.uid}`).valueChanges().subscribe(data => console.log('123', data));
-        afs.doc<Preference>(`users/${user.uid}`).ref.get().then(doc => console.log(doc.data()));
-        this.isLoggedIn = false;
-      }
-    });
-
-    this.newEntryFormControl = fb.group({
-      num: new FormControl('', Validators.required),
-      prefix: new FormControl('', Validators.required),
-      rtoCode: new FormControl('', Validators.required),
-      stateCode: new FormControl('', Validators.required)
-    });
-  }
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit() {
-    // this.filteredStates = this.newEntryFormControl.valueChanges
-    // .pipe(
-    //   startWith(''),
-    //   map(value => typeof value === 'string' ? value : value.name),
-    //   map(name => name ? this._filter(name) : this.options.slice())
-    // );
-  }
-
-  onSubmitNewEntryFormControl() {
-    console.log('hello');
-    console.log(this.newEntryFormControl);
-  }
-
-  login() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-  }
-  logout() {
-    this.afAuth.auth.signOut();
-  }
-
-  uploadImage() {
-
   }
 }

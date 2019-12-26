@@ -2,13 +2,6 @@
     height: 100%;
 }
 
-.float-button-container {
-    display: block;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-}
-
 .main-body {
     padding: 0.7em;
 }
