@@ -33,6 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { CreateEntryComponent } from './create-entry/create-entry.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard]  },
@@ -69,7 +70,11 @@ const appRoutes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    MatDialogModule
+  ],
+  entryComponents: [
+    CreateEntryComponent
   ],
   providers: [
     AuthService

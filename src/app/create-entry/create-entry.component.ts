@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-entry',
@@ -10,7 +11,7 @@ export class CreateEntryComponent implements OnInit {
 
   newEntryFormControl: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<string>) {
     this.newEntryFormControl = fb.group({
       num: new FormControl('', Validators.required),
       prefix: new FormControl('', Validators.required),
