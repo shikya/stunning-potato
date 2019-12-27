@@ -9,5 +9,10 @@
 </mat-toolbar>
 
 <div class="main-body">
+  <div class="full-screen" *ngIf="isAuthOnGoing">
+    <mat-progress-spinner mode="indeterminate" style="margin-left: 37px;"></mat-progress-spinner>
+    <p class="center">Checking Authentication.</p>
+    <p class="center">Please Wait.</p>
+  </div>
   <router-outlet></router-outlet>
 </div>

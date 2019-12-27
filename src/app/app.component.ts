@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { auth, User } from 'firebase/app';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
-import { map, startWith } from 'rxjs/operators';
+import { Router, GuardsCheckStart, GuardsCheckEnd } from '@angular/router';
 
 export interface VehicleEntry { num: number; prefix: string; rtoCode: number; stateCode: string; }
 export interface Preference { classAuthorized: string; }
@@ -17,12 +14,20 @@ export interface Preference { classAuthorized: string; }
 export class AppComponent implements OnInit {
   title = 'stunning-potato';
   isLoggedIn = false;
-
+  isAuthOnGoing = true;
   classNameAuthorized: string;
 
   filteredStates: Observable<string[]>;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private router: Router) {
+    router.events.subscribe(e => {
+      if (e instanceof GuardsCheckStart) {
+        this.isAuthOnGoing = true;
+      } else if (e instanceof GuardsCheckEnd) {
+        this.isAuthOnGoing = false;
+      }
+    });
+  }
 
   ngOnInit() {
   }

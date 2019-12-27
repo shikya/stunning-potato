@@ -18,6 +18,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Custom
 import { AuthService } from './core/auth.service';
@@ -71,7 +72,8 @@ const appRoutes = [
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
     CreateEntryComponent

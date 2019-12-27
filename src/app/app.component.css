@@ -21,3 +21,18 @@ mat-form-field {
 mat-card {
     margin: 10px 5px 5px 5px;
 }
+
+.full-screen {
+    display: block;
+    position: fixed;
+    top: calc(50% - 75px);
+    left: calc(50% - 83px);    
+}
+
+mat-progress-spinner {
+    margin-left: 37px;    
+}
+
+.center {
+    text-align: center;
+}
