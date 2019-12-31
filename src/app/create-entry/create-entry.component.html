@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Add Entry</h1>
+<div mat-dialog-content>
+  <form [formGroup]="newEntryFormControl" class="entry-form" (ngSubmit)="onSubmitNewEntryFormControl()">
+    <!-- 7117 -->
+    <mat-form-field class="full-width">
+      <input formControlName="num" matInput type="number" placeholder="Last 4 digits">
+    </mat-form-field>
+
+    <!-- X -->
+    <mat-form-field>
+      <input formControlName="prefix" matInput type="text" placeholder="Prefix">
+    </mat-form-field>
+
+    <!-- 30 -->
+    <mat-form-field>
+      <input matInput formControlName="rtoCode" type="number" placeholder="RTO code">
+    </mat-form-field>
+
+    <!-- MH -->
+    <mat-form-field>
+      <input type="text" formControlName="stateCode" placeholder="State" aria-label="State" matInput
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredStates | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onSubmitNewEntryFormControl()" type="submit" mat-button color="primary"
+    [disabled]="!newEntryFormControl.valid">Add</button>
+</div>
