@@ -3,9 +3,9 @@ import { Observable } from 'rxjs/internal/Observable';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { auth } from 'firebase';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
 
 export interface Claims {
   name: string;
