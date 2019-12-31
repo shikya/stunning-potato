@@ -35,10 +35,13 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { CreateEntryComponent } from './create-entry/create-entry.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NormalUserGuard } from './normal-user.guard';
+import { NewUserComponent } from './new-user/new-user.component';
 
 const appRoutes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard]  },
-  { path: 'login', component: LoginComponent }
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard, NormalUserGuard]  },
+  { path: 'login', component: LoginComponent },
+  { path: 'newuser', component: NewUserComponent }
 ];
 
 @NgModule({
@@ -49,7 +52,8 @@ const appRoutes = [
     EntryCardComponent,
     DashboardComponent,
     LoginComponent,
-    CreateEntryComponent
+    CreateEntryComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
