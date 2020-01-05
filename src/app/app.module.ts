@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireFunctionsModule, FUNCTIONS_ORIGIN } from '@angular/fire/functions';
 
 // small modules
 import { RoutingModule } from './small-modules/routing.module';
@@ -50,12 +51,14 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
     AngularFirestoreModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     RoutingModule,
+    AngularFireFunctionsModule
   ],
   entryComponents: [
     CreateEntryComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    { provide: FUNCTIONS_ORIGIN, useValue: 'https://bookish-pancake.firebaseapp.com' }
   ],
   bootstrap: [AppComponent]
 })
