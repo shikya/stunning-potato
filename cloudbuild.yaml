@@ -1,5 +1,5 @@
 steps:
   - name: 'gcr.io/cloud-builders/npm:current'
-    args: ['install','-g', 'firebase-tools@7.8.1']
+    args: ['install','-g', 'firebase-tools@8.2.0']
   - name: 'gcr.io/cloud-builders/npm:current'
     args: ['run', 'relase']
