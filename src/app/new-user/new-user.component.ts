@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class NewUserComponent implements OnInit {
 
-  helloWorld: (data: any) => Observable<any>;
+  // helloWorld: (data: any) => Observable<any>;
 
   constructor(private fns: AngularFireFunctions) {
-    this.helloWorld = fns.httpsCallable<any, any>('helloWorld');
+    // this.helloWorld = fns.httpsCallable<any, any>('helloWorld');
     // callable({ name: 'some-data' }).subscribe((data) => {
     //   console.log(data);
     // });
@@ -21,12 +21,12 @@ export class NewUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  callHelloWorld() {
-    this.helloWorld({ name: 'some-data' }).toPromise()
-      .then((data) => console.log('data', data))
-      .catch((error) => console.error('error', error))
-      .finally(() => {
-        console.log('fininshed');
-      });
-  }
+  // callHelloWorld() {
+  //   this.helloWorld({ name: 'some-data' }).toPromise()
+  //     .then((data) => console.log('data', data))
+  //     .catch((error) => console.error('error', error))
+  //     .finally(() => {
+  //       console.log('fininshed');
+  //     });
+  // }
 }

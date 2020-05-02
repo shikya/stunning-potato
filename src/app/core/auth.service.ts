@@ -41,32 +41,32 @@ export class AuthService {
     // Get the auth state, then fetch the Firestore user document or return null
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
-        user.getIdTokenResult().then((data: firebase.auth.IdTokenResult) => {
-          this.claims = {
-            name: data.claims.name,
-            picture: data.claims.picture,
-            iss: data.claims.iss,
-            aud: data.claims.aud,
-            auth_time: data.claims.auth_time,
-            user_id: data.claims.user_id,
-            sub: data.claims.sub,
-            email: data.claims.email,
-            identities: data.claims.identities,
-            isAdmin: data.claims.isAdmin ? 1 : 0,
-            isPark: data.claims.isPark ? 1 : 0,
-            isAttend: data.claims.isAttend ? 1 : 0,
-            classAuth: data.claims.classAuth
-          };
-          console.log('claims', JSON.stringify(this.claims), this.claims);
-          console.log(data);
-        });
-          // Logged in
         if (user) {
+          // Logged in
           return this.afs.doc<AppUser>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
           return of(null);
         }
+        // user.getIdTokenResult().then((data: firebase.auth.IdTokenResult) => {
+        //   this.claims = {
+        //     name: data.claims.name,
+        //     picture: data.claims.picture,
+        //     iss: data.claims.iss,
+        //     aud: data.claims.aud,
+        //     auth_time: data.claims.auth_time,
+        //     user_id: data.claims.user_id,
+        //     sub: data.claims.sub,
+        //     email: data.claims.email,
+        //     identities: data.claims.identities,
+        //     isAdmin: data.claims.isAdmin ? 1 : 0,
+        //     isPark: data.claims.isPark ? 1 : 0,
+        //     isAttend: data.claims.isAttend ? 1 : 0,
+        //     classAuth: data.claims.classAuth
+        //   };
+        //   console.log('claims', JSON.stringify(this.claims), this.claims);
+        //   console.log(data);
+        // });
       }));
   }
 

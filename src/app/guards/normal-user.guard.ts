@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { tap, map, take } from 'rxjs/operators';
+
 import { AuthService } from '../core/auth.service';
 
 @Injectable({
@@ -13,11 +15,21 @@ export class NormalUserGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const isNewUser = (this.auth.claims && this.auth.claims.classAuth !== undefined);
-      if (!isNewUser) {
-        this.router.navigate(['/newuser']);
-      }
-      return isNewUser;
+      return this.auth.user$.pipe(
+        take(1),
+        map(user => !!user), // <-- map to boolean
+        tap(loggedIn => {
+          if (!loggedIn) {
+            console.log('access denied from normal user guard');
+            this.router.navigate(['/login']);
+          } else {
+            const isNewUser = (this.auth.claims && this.auth.claims.classAuth !== undefined);
+            if (!isNewUser) {
+              this.router.navigate(['/newuser']);
+            }
+            return isNewUser;
+          }
+      }));
   }
 
 }

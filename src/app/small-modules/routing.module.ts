@@ -8,16 +8,16 @@ import { LoginComponent } from '../login/login.component';
 import { NewUserComponent } from '../new-user/new-user.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard, NormalUserGuard]  },
   { path: 'login', component: LoginComponent },
-  { path: 'newuser', component: NewUserComponent }
+  { path: '', component: DashboardComponent, canActivate: [ NormalUserGuard ]  },
+  { path: 'newuser', component: NewUserComponent, canActivate: [ AuthGuard ]  },
 ];
 
 @NgModule({
   declarations: [],
   imports: [ RouterModule.forRoot(
     routes,
-    { enableTracing: true } // <-- debugging purposes only
+    // { enableTracing: true } // <-- debugging purposes only
   ), ],
   exports: [ RouterModule ]
 })
