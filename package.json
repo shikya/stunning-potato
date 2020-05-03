@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "prerelase": "npm ci",
     "relase": "ng build --prod",
-    "postrelase": "firebase deploy --only hosting"
+    "postrelase": "firebase --debug deploy --only hosting"
   },
   "private": true,
   "dependencies": {
