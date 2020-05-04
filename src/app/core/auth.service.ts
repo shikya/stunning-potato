@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { auth } from 'firebase';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
+import { merge } from 'rxjs/operators';
 
 export interface Claims {
   name: string;
   picture: string;
-  iss: string;
-  aud: string;
-  auth_time: string;
   user_id: string;
-  sub: string;
   email: string;
-  identities: string;
-  isAdmin: number;
-  isPark: number;
-  isAttend: number;
-  classAuth: string;
+  authorized: Authorized;
 }
+
+export interface Authorized {
+  admin: string[];
+  employee: string[];
+}
+
 export interface AppUser {
   uid: string;
   email: string;
@@ -43,30 +42,21 @@ export class AuthService {
       switchMap(user => {
         if (user) {
           // Logged in
+          user.getIdTokenResult().then((data: firebase.auth.IdTokenResult) => {
+            console.log('data', data);
+            this.claims = {
+              name: data.claims.name,
+              picture: data.claims.picture,
+              user_id: data.claims.user_id,
+              email: data.claims.email,
+              authorized: data.claims.authorized
+            };
+          });
           return this.afs.doc<AppUser>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
           return of(null);
         }
-        // user.getIdTokenResult().then((data: firebase.auth.IdTokenResult) => {
-        //   this.claims = {
-        //     name: data.claims.name,
-        //     picture: data.claims.picture,
-        //     iss: data.claims.iss,
-        //     aud: data.claims.aud,
-        //     auth_time: data.claims.auth_time,
-        //     user_id: data.claims.user_id,
-        //     sub: data.claims.sub,
-        //     email: data.claims.email,
-        //     identities: data.claims.identities,
-        //     isAdmin: data.claims.isAdmin ? 1 : 0,
-        //     isPark: data.claims.isPark ? 1 : 0,
-        //     isAttend: data.claims.isAttend ? 1 : 0,
-        //     classAuth: data.claims.classAuth
-        //   };
-        //   console.log('claims', JSON.stringify(this.claims), this.claims);
-        //   console.log(data);
-        // });
       }));
   }
 
@@ -85,10 +75,10 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
     };
 
-    return userRef.set(data, { merge: true });
+    userRef.set(data, { merge: true });
 
   }
 

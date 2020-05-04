@@ -23,7 +23,9 @@ export class NormalUserGuard implements CanActivate {
             console.log('access denied from normal user guard');
             this.router.navigate(['/login']);
           } else {
-            const isNewUser = (this.auth.claims && this.auth.claims.classAuth !== undefined);
+            const isNewUser = (this.auth.claims &&
+              this.auth.claims.authorized.admin.length === 0 ||
+              this.auth.claims.authorized.employee.length === 0);
             if (!isNewUser) {
               this.router.navigate(['/newuser']);
             }
